@@ -1,0 +1,25 @@
+.movies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+img{
+    padding: 10px;
+}
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.text-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1{
+    color:white;
+}

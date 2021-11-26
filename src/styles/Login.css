@@ -1,0 +1,19 @@
+@media all and (min-width: 480px) {
+  .Login {
+    padding: 60px 0;
+    color:white;
+  }
+
+  .Login form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+button{
+  margin-top: 10px;
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  transition: all ease-in-out 0.3s;
+  background-color:#a2b2f2;
+}
+}
