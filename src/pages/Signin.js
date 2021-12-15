@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Button, FormGroup, FormControl } from "react-bootstrap";
 
 
-export default function Login(props) {
+export default function Signin(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     function performValidation() {
@@ -34,7 +34,7 @@ export default function Login(props) {
                     />
                 </FormGroup>
                 <Button block bsSize="large" disabled={!performValidation()} type="submit">
-                    Login
+                    Signin
                 </Button>
             </form>
         </div>
