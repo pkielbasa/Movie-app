@@ -1,62 +1,85 @@
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import '../styles/Login.css';
-import React, { useState } from "react";
-import { Button, FormGroup, FormControl } from "react-bootstrap";
+import axios from "axios";
+import '../styles/Form.css'
+import '../styles/Input.css';
+
+const Signup = () => {
+
+    const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
+    const [password, setPassword] = useState('')
 
 
-export default function Signup(props) {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [login, setLogin] = useState("");
-    const [email, setEmail] = useState("");
-    function performValidation() {
-        return username.length > 0 && password.length > 0;
-    }
-    function handleSubmit(event) {
+    const navigate = useNavigate();
+
+    const HandleChangeRoute = () => {
+        navigate('/')
+        window.location.reload();
+    };
+
+
+
+    const HandleSubmit = (event) => {
+        checkTextInput();
         event.preventDefault();
-    }
-    return (
-        <div className="Signin">
-            <form onSubmit={handleSubmit}>
-                <FormGroup controlId="username" bsSize="large">
-                    <h1>Username</h1>
-                    <FormControl
-                        autoFocus
-                        type="text"
-                        value={username}
-                        onChange={e => setUsername(e.target.value)}
-                    />
-                </FormGroup>
-                <FormGroup controlId="login" bsSize="large">
-                    <h1>Login</h1>
-                    <FormControl
-                        value={login}
-                        onChange={e => setLogin(e.target.value)}
-                        type="text"
-                    />
-                </FormGroup>
-                <FormGroup controlId="password" bsSize="large">
-                    <h1>Password</h1>
-                    <FormControl
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        type="password"
-                    />
-                </FormGroup>
-                    <FormGroup controlId="email" bsSize="large">
-                        <h1>Email</h1>
-                        <FormControl
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                            type="text"
+        axios({
+            method: 'post',
+            url: 'https://pr-movies.herokuapp.com/api/user/create',
+            data: {
+                email: email,
+                name: name,
+                password: password,
+            }
+        }).then((response) => {
+            HandleChangeRoute();
+        }).catch((error) => {
+            alert("Podany email lub login są już używane!")
+            console.log(error);
+        });
+        ;
+    };
+
+    const checkTextInput = () => {
+        if (!name.trim()) {
+            alert('Please Enter Name');
+            return;
+        }
+        if (!password.trim()) {
+            alert('Please Enter password');
+            return;
+        }
+        if (!email.trim()) {
+            alert('Please Enter email');
+            return;
+        }
+    };
+        return (
+            <div>
+                <h1>Sign Up</h1>
+                <form onSubmit={HandleSubmit}>
+                    <div className="form-group">
+                        <input className="formInput" placeholder="First Name" size="lg"
+                               onChange={e => setName(e.target.value)}/><br />
+                    </div>
+                    <div className="form-group">
+                        <input className="formInput" placeholder="Email" size="lg" type={"email"}
+                               onChange={e => setEmail(e.currentTarget.value)}/><br />
+                    </div>
+                    <div className="form-group">
+                        <input id="password1"
+                               pr="4.5rem"
+                               type={"password"}
+                               placeholder="Password"
+                               onChange={e => setPassword(e.target.value)}
                         />
-                    </FormGroup>
-                <Button block bsSize="large" disabled={!performValidation()} type="submit">
-                    Signin
-                </Button>
-            </form>
-        </div>
-    );
+                    </div>
+                    <button type="submit" className="btn btn-primary">SignUp</button>
+                </form>
+
+            </div>
+        );
 }
 
-
+export default Signup;

@@ -1,36 +1,37 @@
-import React from "react";
+import React, {useContext} from "react";
 
-import Input from "../components/Input";
+import { Link } from "react-router-dom";
 
-
+import { MovieContext } from "../context/MovieContext";
+import Card from "../components/Card";
 import "../styles/Home.css";
-import image from "../images/image.jpg"
-import image2 from "../images/image2.jpg"
-import image3 from "../images/image3.jpg"
-import image4 from "../images/image4.jpg"
-import image5 from "../images/image5.jpg"
-import image6 from "../images/image6.jpg"
-import {Link} from "react-router-dom";
+
+
 const Home = () => {
+    const { movies} = useContext(MovieContext);
 
-  return (
-    <div className="home-container">
-      <Input />
+    return (
+        <div className="home-container">
 
+                <div className="movies">
+                    {movies?.map((movie) => {
+                        return (
+                            <Link
+                                to={`movies/${movie.id}`}
+                                className="text-link"
+                                key={movie.id}
+                            >
+                                <Card
+                                    key={movie.id}
+                                    image={movie.image}
+                                    title={movie.title}
+                                />
+                            </Link>
+                        );
+                    })}
+                </div>
 
-        <div className="movies">
-            <Link to ="/details">
-                <img src={image}/>
-            <img src={image2}/>
-            <img src={image4}/>
-            <img src={image5}/>
-            <img src={image6}/>
-            <img src={image3}/>
-        </Link>
         </div>
-
-    </div>
-  );
+    );
 };
-
 export default Home;

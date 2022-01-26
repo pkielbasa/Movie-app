@@ -1,44 +1,80 @@
+import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import '../styles/Login.css';
-import React, { useState } from "react";
-import { Button, FormGroup, FormControl } from "react-bootstrap";
+import axios from "axios";
+import '../styles/Form.css'
+import '../styles/Input.css';
+
+const Signin = () => {
+
+    const [name, setName] = useState('')
+    const [password, setPassword] = useState('')
 
 
-export default function Signin(props) {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    function performValidation() {
-        return username.length > 0 && password.length > 0;
-    }
-    function handleSubmit(event) {
+    const navigate = useNavigate();
+
+    const HandleChangeRoute = () => {
+        navigate('/')
+        window.location.reload();
+    };
+
+
+
+    const HandleSubmit = (event) => {
+        checkTextInput();
         event.preventDefault();
-    }
+        axios({
+            method: 'post',
+            url: 'https://pr-movies.herokuapp.com/api/user/auth',
+            data: {
+                login: name,
+                password: password,
+            }
+        }).then((response) => {
+            localStorage.setItem('token', response.data.token);
+            console.log(response.data.token)
+            HandleChangeRoute();
+        }).catch((error) => {
+            alert("Podany email lub login są błędne!")
+            console.log(error);
+        });
+
+    };
+    const checkTextInput = () => {
+        if (!name.trim()) {
+            alert('Please Enter Name');
+            return;
+        }
+        if (!password.trim()) {
+            alert('Please Enter password');
+
+        }
+    };
+
+
     return (
-        <div className="Login">
-            <form onSubmit={handleSubmit}>
-                <FormGroup controlId="username" bsSize="large">
-                    <h1>Username</h1>
-                    <FormControl
-                        autoFocus
-                        type="text"
-                        value={username}
-                        onChange={e => setUsername(e.target.value)}
+        <div id="signUpBackground">
+            <div id="signinForm">
+            </div>
+            <h1>Sign In</h1>
+            <div id="signForm">
+                <form id="formSign" onSubmit={HandleSubmit}>
+                    <input className="formInput" placeholder="First Name" size="lg"
+                           onChange={e => setName(e.target.value)}/><br />
+                    <input id="password1"
+                           pr="4.5rem"
+                           type={"password"}
+                           placeholder="Password"
+                           onChange={e => setPassword(e.target.value)}
                     />
-                </FormGroup>
-                <FormGroup controlId="password" bsSize="large">
-                    <h1>Password</h1>
-                    <FormControl
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        type="password"
-                    />
-                </FormGroup>
-                <Button block bsSize="large" disabled={!performValidation()} type="submit">
-                    Signin
-                </Button>
-            </form>
+
+                    <br/>
+                    <button id="createAccountButton" type="submit">Zaloguj!</button>
+                </form>
+            </div>
         </div>
-    );
+)
 }
 
 
+export default Signin;
