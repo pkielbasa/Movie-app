@@ -30,6 +30,7 @@ const Detail = () => {
                 </div>
             </div>
         </div>
+
     );
 };
 
