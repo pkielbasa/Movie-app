@@ -2,7 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-
+  margin-bottom: 10px;
+background-color: gray;
 }
 img{
   padding: 10px;
@@ -13,8 +14,14 @@ img{
   align-items: center;
 }
 
-
-
+.albums {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  color: red;
+  background-color: yellow;
+  margin-bottom: 8px;
+}
 .text-link {
   text-decoration: none;
   color: inherit;

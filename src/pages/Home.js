@@ -14,8 +14,11 @@ const Home = () => {
         <div className="home-container">
 
                 <div className="movies">
+                    <h5>Test</h5>
+
                     {movies?.map((movie) => {
                         return (
+
                             <Link
                                 to={`movies/${movie.id}`}
                                 className="text-link"
@@ -30,6 +33,27 @@ const Home = () => {
                         );
                     })}
                 </div>
+
+            <div className="albums">
+                <h3>Test</h3>
+                {movies?.map((movie) => {
+                    return (
+
+
+                        <Link
+                            to={`movies/${movie.id}`}
+                            className="text-link"
+                            key={movie.id}
+                        >
+                            <Card
+                                key={movie.id}
+                                image={movie.image}
+                                title={movie.title}
+                            />
+                        </Link>
+                    );
+                })}
+            </div>
 
         </div>
     );
