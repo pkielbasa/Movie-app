@@ -6,7 +6,10 @@ nav {
   border-bottom: 1px solid #eeee;
 }
 
+.player{
+  width:300px;
 
+}
 
 .logo {
   display: flex;
@@ -23,6 +26,14 @@ nav {
   font-size: 28px;
 }
 
+.logo2 {
+  align-items: center;
+  padding: 10px;
+  border: none;
+  font-size: 28px;
+
+}
+
 .nav-item {
   display: flex;
   justify-content: center;
@@ -31,7 +42,7 @@ nav {
 
 li, link {
   display: inline-block;
-  text-decoration: none;
+  text-decoration: none!important;
 }
 
 ul {
@@ -46,7 +57,6 @@ ul {
   padding: 10px 5px;
   border-radius: 5px;
   color: black;
-
 }
 
 .link:hover {

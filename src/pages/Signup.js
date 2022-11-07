@@ -38,7 +38,7 @@ const Signup = () => {
             alert("Podany email lub login są już używane!")
             console.log(error);
         });
-        ;
+
     };
 
     const checkTextInput = () => {
@@ -52,7 +52,7 @@ const Signup = () => {
         }
         if (!email.trim()) {
             alert('Please Enter email');
-            return;
+
         }
     };
         return (

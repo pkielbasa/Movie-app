@@ -29,7 +29,6 @@ const Home = () => {
                 <input className="navbar-search-input" placeholder="szukaj artystów"
                        onChange={(e) => searchItems(e.target.value)}/>
             </div>
-
                 <div className="movies">
                     <h5>Test</h5>
                     {searchInput.length > 1 ? (

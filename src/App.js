@@ -10,6 +10,9 @@ import Signin from "./pages/Signin";
 import Details from "./pages/Details";
 import Signup from "./pages/Signup";
 import Add from "./pages/Add";
+import Artists from "./pages/Artists";
+import Albums from "./pages/Albums";
+
 import {isExpired} from "react-jwt";
 import * as PropTypes from "prop-types";
 
@@ -30,6 +33,8 @@ function App() {
         <Router>
             <Layout>
                 <Routes>
+                    <Route  path='/artists' element={<Artists/>}/>
+                    <Route  path='/albums' element={<Albums/>}/>
                     <Route  path='/' element={<Home/>}/>
                     <Route  path='/signin' element={!isNotLogged ? <Navigate to='/'/> : <Signin/>} />
                     <Route  path='/movies/:id' element={<Details/>}/>

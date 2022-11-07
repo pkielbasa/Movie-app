@@ -4,15 +4,32 @@ import { Link } from 'react-router-dom';
 
 import '../styles/Header.css';
 import {decodeToken, isExpired} from "react-jwt";
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 
 const Header = () => {
 
     const isNotLogged = isExpired(localStorage.getItem('token'));
+
+    const Player = () => (
+        <AudioPlayer
+            autoPlay
+            src="http://biblia-mp3.pl/Ksiega_Rodzaju_1-8.mp3"
+            onPlay={e => console.log("onPlay")}
+        />
+    );
         return (
+
             <header>
                 <nav>
-                    <div className='logo'><Link to='/' className='link'>Home
-                    </Link></div>
+                    <div className='logo2'>
+                        <ul>
+                            <li><Link to='/artists'  className='link'> Artists</Link></li>
+                            <li><Link to='/albums'  className='link'> Albums</Link></li>
+                    </ul>
+                    </div>
+                    <div className='logo'><Link to='/' className='link'>Home</Link>
+                    </div>
                     <div >
                         <div className='logo1'>
                             <ul>
@@ -30,8 +47,13 @@ const Header = () => {
                             </li>}
                             </ul>
                         </div>
+                        <div className="player">
+                            <Player></Player>
+                        </div>
                     </div>
+
                 </nav>
+
             </header>
         );
     };
