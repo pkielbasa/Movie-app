@@ -9,67 +9,44 @@ import "../styles/Home.css";
 
 const Home = () => {
     const { movies} = useContext(MovieContext);
-    const [filteredResults, setFilteredResults] = useState([]);
-    const [searchInput, setSearchInput] = useState('');
+    const [counter, setCounter] = useState(5);
 
-    const searchItems = (searchValue) => {
-        setSearchInput(searchValue)
-        if (searchInput !== '') {
-            const filteredData = movies.filter((item) => {
-                return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
-            })
-            setFilteredResults(filteredData)
-        } else {
-            setFilteredResults(movies)
-        }
+    const incrementCounter = () => {
+        setCounter(counter + 100);
+        console.log('I was triggered during componentDidMount')
+
     }
+
+
     return (
         <div className="home-container">
-            <div className="navbar-search">
-                <input className="navbar-search-input" placeholder="szukaj artystów"
-                       onChange={(e) => searchItems(e.target.value)}/>
-            </div>
-                <div className="movies">
-                    <h5>Test</h5>
-                    {searchInput.length > 1 ? (
-                        filteredResults.map((item) => {
-                            return (
-                                <Link
-                                    to={`movies/${item.id}`}
-                                    className="text-link"
-                                    key={item.id}
-                                >
-                                    <Card
-                                        key={item.id}
-                                        image={item.image}
-                                        title={item.title}
-                                    />
-                                </Link>
-                            );
-                        })
-                    ) : false
-                    }
-                </div>
-            <div className="albums">
-                <h3>Test</h3>
-                {movies?.map((movie) => {
-                    return (
-                        <Link
-                            to={`movies/${movie.id}`}
-                            className="text-link"
-                            key={movie.id}
-                        >
-                            <Card
-                                key={movie.id}
-                                image={movie.image}
-                                title={movie.title}
-                            />
-                        </Link>
-                    );
-                })}
-            </div>
+            <h4>Wybrane albumy</h4>
 
-        </div>
-    );
-};
+            <div className="movies">
+                    {
+                        movies.filter((movie,index) => index < counter).map((movie) => {
+                                return (
+                                    <Link
+                                        to={`movies/${movie.id}`}
+                                        className="text-link"
+                                        key={movie.id}
+                                    >
+                                        <Card
+                                            key={movie.id}
+                                            image={movie.image}
+                                            title={movie.title}
+                                        />
+                                    </Link>
+
+                                );
+
+                            })}
+
+                        </div>
+            <button type="button" onClick={incrementCounter}>Pokaż więcej
+            </button>
+                        </div>
+                        );
+
+                    };
 export default Home;
